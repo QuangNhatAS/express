@@ -1,7 +1,11 @@
 const express = require('express');
+const bodyParser = require('body-parser')
 const app = express();
 const port = 3000;
 
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
 const users = [
 	{ id: 1, name: "Quang"},
 	{ id: 2, name: "Nhat"}
@@ -25,6 +29,15 @@ app.get('/users/search', (req, res) => {
 	res.render('users/index', {
 		users: matchUser
 	})
+});
+
+app.get('/users/create', (req, res) => {
+	res.render('users/create')
+});
+
+app.post('/users/create', (req, res) => {
+	users.push(req.body);
+	res.redirect('/users');
 })
 
 app.listen(port, () => console.log(`I am listening on ${port}`))
