@@ -2,14 +2,19 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const app = express();
 const port = 3000;
+const low = require('lowdb')
+const FileSync = require('lowdb/adapters/FileSync')
+
+const adapter = new FileSync('db.json')
+const db = low(adapter)
+
+db.defaults({ users: []})
+  .write()
 
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
-const users = [
-	{ id: 1, name: "Quang"},
-	{ id: 2, name: "Nhat"}
-]
+
 app.set('view engine', 'pug');
 
 app.get('/', (req, res) => {
@@ -19,13 +24,13 @@ app.get('/', (req, res) => {
 });
 app.get('/users', (req, res) => {
 	res.render('users/index', {
-		users: users
+		users: db.get('users').value()
 	})
 });
 
 app.get('/users/search', (req, res) => {
 	const q = req.query.q.toLowerCase();
-	const matchUser = users.filter(user => user.name.toLowerCase().indexOf(q) !== -1)
+	const matchUser = db.get('users').value().filter(user => user.name.toLowerCase().indexOf(q) !== -1)
 	res.render('users/index', {
 		users: matchUser
 	})
@@ -36,7 +41,7 @@ app.get('/users/create', (req, res) => {
 });
 
 app.post('/users/create', (req, res) => {
-	users.push(req.body);
+	db.get('users').push(req.body).write();
 	res.redirect('/users');
 })
 
