@@ -1,5 +1,6 @@
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const shortid = require('shortid');
 const app = express();
 const port = 3000;
 const low = require('lowdb')
@@ -40,7 +41,16 @@ app.get('/users/create', (req, res) => {
 	res.render('users/create')
 });
 
+app.get('/users/:id', (req, res) => {
+	const id = req.params.id;
+	const user = db.get('users').find({id: id}).value();
+	res.render('users/view', {
+		user: user
+	})
+})
+
 app.post('/users/create', (req, res) => {
+	req.body.id = shortid.generate();
 	db.get('users').push(req.body).write();
 	res.redirect('/users');
 })
