@@ -1,7 +1,14 @@
 extends ../layouts/common
 block content
     h1 Create user
-    form(method="POST", action="/users/create", class="d-flex")
-        label Name
-        input(type="text", name="name", class="form-control")
+    if errors
+        each error in errors
+            .alert.alert-danger= error
+    form(method="POST", action="/users/create")
+        .form-group
+            label(for="name") Name
+            input(id="name" type="text", name="name", class="form-control", value=values ? values.name : '')
+        .form-group
+            label(for="phone") Phone
+            input(id="phone" type="text", name="phone", class="form-control", value=values ? values.phone : '')
         button(class="btn btn-primary") Create
