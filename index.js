@@ -11,7 +11,7 @@ const port = 3000;
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json());
-app.use(cookieParser());
+app.use(cookieParser('sdasdaeedsafdf'));
 
 app.set('view engine', 'pug');
 
