@@ -6,6 +6,7 @@ const controller = require('../controllers/user.controller');
 
 const validate = require('../validate/user.validate');
 
+
 router.get('/', controller.home);
 
 router.get('/search', controller.search);

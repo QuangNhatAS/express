@@ -1,20 +1,14 @@
 {
   "users": [
     {
-      "name": "Sang",
-      "id": "rTDwiZlOi"
-    },
-    {
       "name": "Đoàn Quang Nhật",
-      "id": "VS6QDsowe"
+      "id": "VS6QDsowe",
+      "email": "doanquangnhat97@gmail.com",
+      "password": "12345"
     },
     {
       "name": "Ly",
       "id": "sIfXBnOQk"
-    },
-    {
-      "name": "Quann",
-      "id": "2XwUSxBdt"
     },
     {
       "name": "Quang Nhật",
