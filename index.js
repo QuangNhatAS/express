@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json());
 app.use(cookieParser(process.env.SESSION_SECRECT));
+app.use(express.static('public'));
 
 app.set('view engine', 'pug');
 
