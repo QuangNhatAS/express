@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 
 const userRoute = require('./routes/user.route');
 const authRoute = require('./routes/auth.route');
+const productRoute = require('./routes/product.route');
+
 const authMiddleware = require('./middlewares/auth.middleware');
 const app = express();
 const port = 3000;
@@ -24,5 +26,6 @@ app.get('/', (req, res) => {
 
 app.use('/users',authMiddleware.requireAuth, userRoute);
 app.use('/auth', authRoute);
+app.use('/products', productRoute);
 
 app.listen(port, () => console.log(`I am listening on ${port}`))
